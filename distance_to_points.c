@@ -22,7 +22,6 @@ double f(double a, double b, double x[], double y[]) {
 int main(void) {
     srand((unsigned)time(NULL));
 
-    // points aléatoires    double x[N], y[N];
     for (int i = 0; i < N; i++) {
         x[i] = randint(0,20);
         y[i] = randint(0,20);
