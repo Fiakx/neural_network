@@ -1,13 +1,14 @@
 #include <stdio.h>
+#include <math.h>
 
 double f(double x, double y) {
-    return y*y*y + 2*y*y - x*x;
+    return sin(sqrt(x*x + y*y));
 }
 
 // send the grid of points (x, y, f(x,y)) to gnuplot
 void envoyer_donnees(FILE *gp) {
-    int n = 40;
-    double xmin = -3, xmax = 3, ymin = -3, ymax = 2;
+    int n = 60; // precision of the 3D
+    double xmin = -6, xmax = 6, ymin = -6, ymax = 6;
     for (int i = 0; i <= n; i++) {
         double x = xmin + (xmax - xmin) * i / n;
         for (int j = 0; j <= n; j++) {
@@ -26,7 +27,7 @@ int view_3d(void) {
 
     fprintf(gp, "set xlabel 'x'\nset ylabel 'y'\nset zlabel 'f(x,y)'\n");
     fprintf(gp, "set hidden3d\nset pm3d\n");
-    fprintf(gp, "splot '-' with lines title 'f(x,y) = y^3 + 2y^2 - x^2'\n");
+    fprintf(gp, "splot '-' with lines title 'f(x,y) = sin(sqrt(y*y+x*x))'\n");
     envoyer_donnees(gp);
 
     pclose(gp);
